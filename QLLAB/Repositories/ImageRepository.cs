@@ -14,7 +14,7 @@ namespace QLLAB.Repositories
             _labContext = labContext;
         }
 
-        public async Task SaveImage(Image image)
+        public async Task SaveImageAsync(Image image)
         {
             _labContext.Images.Add(image);
             await _labContext.SaveChangesAsync();

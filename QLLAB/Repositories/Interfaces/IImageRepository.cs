@@ -5,6 +5,6 @@ namespace QLLAB.Repositories.Interfaces
 {
     public interface IImageRepository
     {
-        Task SaveImage(Image image);
+        Task SaveImageAsync(Image image);
     }
 }

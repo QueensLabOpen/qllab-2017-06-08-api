@@ -5,6 +5,7 @@ namespace QLLAB.Controllers
     [Route("api/[controller]")]
     public class ContentController : Controller
     {
+        [HttpGet]
         [Route("")]
         public IActionResult Get()
         {

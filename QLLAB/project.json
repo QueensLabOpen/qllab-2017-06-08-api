@@ -20,7 +20,8 @@
     },
     "Swashbuckle": "6.0.0-beta901",
     "Swashbuckle.SwaggerGen": "6.0.0-beta901",
-    "Swashbuckle.SwaggerUi": "6.0.0-beta901"
+    "Swashbuckle.SwaggerUi": "6.0.0-beta901",
+    "WindowsAzure.Storage": "8.1.1"
   },  
   "tools": {
     "Microsoft.AspNetCore.Server.IISIntegration.Tools": "1.0.0-preview2-final"

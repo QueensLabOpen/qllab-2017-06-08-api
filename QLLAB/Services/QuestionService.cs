@@ -34,9 +34,11 @@ namespace QLLAB.Services
             List<Image> losers = _context.Images.Where(i => i.Tags.Contains(winningTag)).ToList();
             Answer loserA = new Answer(losers[rnd.Next(losers.Count)].Url, false);
             Answer loserB = new Answer(losers[rnd.Next(losers.Count)].Url, false);
+            Answer loserC = new Answer(losers[rnd.Next(losers.Count)].Url, false);
 
             question.Answers.Add(loserA);
             question.Answers.Add(loserB);
+            question.Answers.Add(loserC);
 
 
             return question;

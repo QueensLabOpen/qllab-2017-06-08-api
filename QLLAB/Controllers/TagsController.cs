@@ -9,6 +9,7 @@ namespace QLLAB.Controllers
     [Route("api/[controller]")]
     public class TagsController : Controller
     {
+        [HttpGet]
         [Route("")]
         public IActionResult Get()
         {

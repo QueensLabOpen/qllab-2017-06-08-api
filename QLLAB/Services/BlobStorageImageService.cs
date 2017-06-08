@@ -35,9 +35,10 @@ namespace QLLAB.Services
 
         public async Task<Content> SaveAsync(Content image)
         {
+            var blobId = Guid.NewGuid();
             var container = GetContainer();
             var imageBytes = Convert.FromBase64String(image.Data);
-            var blobName = Guid.NewGuid().ToString();
+            var blobName = blobId.ToString();
             var blob = container.GetBlockBlobReference(blobName);
             var extension = Path.GetExtension(image.Filename);
             blob.Properties.ContentType = $"img/{extension}";
@@ -47,6 +48,7 @@ namespace QLLAB.Services
                 await blob.UploadFromStreamAsync(stream);
             }
 
+            image.BlobId = blobId;
             return await Task.Run(() => image);
         }
 

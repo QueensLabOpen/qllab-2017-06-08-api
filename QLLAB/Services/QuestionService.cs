@@ -4,7 +4,6 @@ using QLLAB.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace QLLAB.Services
 {
@@ -15,48 +14,55 @@ namespace QLLAB.Services
         public QuestionService(QlLabContext context)
         {
             _context = context;
-
         }
 
         public Question GetRandom()
         {
             var tags = _context.Images.Select(i => i.Tags).ToList();
             var distinct = ExtractDistinct(tags);
-            Random rnd = new Random();
+            var rnd = new Random();
             int max = rnd.Next(distinct.Count);
             string winningTag = distinct[max];
 
-            List<Image> possibleWinners = _context.Images.Where(i => i.Tags.Contains(winningTag)).ToList();
-            Question question = new Question(winningTag);
-            Answer winner = new Answer(possibleWinners[max].Url, true);
+            var possibleWinners = _context.Images.Where(i => !i.Tags.Contains(winningTag)).ToList();
+            var question = new Question(winningTag);
+
+            if(possibleWinners.Count < 1)
+                return question;
+
+            var winner = new Answer(possibleWinners[max].Url, true);
             question.Answers.Add(winner);
 
-            List<Image> losers = _context.Images.Where(i => i.Tags.Contains(winningTag)).ToList();
-            Answer loserA = new Answer(losers[rnd.Next(losers.Count)].Url, false);
-            Answer loserB = new Answer(losers[rnd.Next(losers.Count)].Url, false);
-            Answer loserC = new Answer(losers[rnd.Next(losers.Count)].Url, false);
+            var losers = _context.Images.Where(i => i.Tags.Contains(winningTag)).ToList();
+            var loserA = new Answer(losers[rnd.Next(losers.Count)].Url, false);
+            var loserB = new Answer(losers[rnd.Next(losers.Count)].Url, false);
+            var loserC = new Answer(losers[rnd.Next(losers.Count)].Url, false);
 
             question.Answers.Add(loserA);
             question.Answers.Add(loserB);
             question.Answers.Add(loserC);
 
-
             return question;
-
         }
 
-        private List<string> ExtractDistinct(List<string> tags)
+        private static List<string> ExtractDistinct(IEnumerable<string> tags)
         {
-            List<string> splitTags = new List<string>();
-            foreach (string tag in tags)
+            var splitTags = new List<string>();
+            foreach (var tag in tags)
             {
                 var temp = tag.Split(',').ToList();
                 splitTags.AddRange(temp);
             }
-            List<string> distinct = new List<string>();
-            for (int i=0; i < splitTags.Count; i++)
+            var distinct = new List<string>();
+            for (var i=0; i < splitTags.Count; i++)
             {
-                if (splitTags[i] != splitTags[i - 1])
+                if (i == 0)
+                {
+                    distinct.Add(splitTags[0]);
+                    continue;
+                }
+
+                if (i != 0 && splitTags[i] != splitTags[i - 1])
                 {
                     distinct.Add(splitTags[i].Trim());
                 }

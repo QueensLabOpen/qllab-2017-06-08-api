@@ -13,6 +13,7 @@ namespace QLLAB.Controllers
         {
             _questionService = questionService;
         }
+
         [HttpGet]
         [Route("")]
         public IActionResult Get()

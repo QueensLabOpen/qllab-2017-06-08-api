@@ -47,6 +47,7 @@ namespace QLLAB
             services.AddDbContext<QlLabContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DbConnection")));
             services.AddTransient<IBlobStorageImageService, BlobStorageImageService>(provider => new BlobStorageImageService(Configuration.GetConnectionString("BlobStorageConnectionString"), provider.GetService<IOptions<AppSettings>>().Value.BlobStorageContainerName));
             services.AddTransient<IImageRepository, ImageRepository>();
+            services.AddTransient<IQuestionService, QuestionService>();
 
             services.AddCors(o => o.AddPolicy("AllowAllCorsPolicy", builder =>
             {

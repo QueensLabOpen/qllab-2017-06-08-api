@@ -10,14 +10,16 @@ namespace QLLAB.Controllers
         [Route("")]
         public IActionResult Get()
         {
-            Answer a = new Answer("http://via.placeholder.com/1080x640", false);
-            Answer b = new Answer("http://via.placeholder.com/1080x640", false);
-            Answer c = new Answer("http://via.placeholder.com/1080x640?text=Winner", true);
+            Answer a = new Answer("http://via.placeholder.com/1080x480", false);
+            Answer b = new Answer("http://via.placeholder.com/1080x480", false);
+            Answer c = new Answer("http://via.placeholder.com/1080x480?text=Winner", true);
+            Answer d = new Answer("http://via.placeholder.com/1080x480", false);
 
             Question question = new Question("tag4");
             question.Answers.Add(a);
             question.Answers.Add(b);
             question.Answers.Add(c);
+            question.Answers.Add(d);
             return Ok(question);
         }
 

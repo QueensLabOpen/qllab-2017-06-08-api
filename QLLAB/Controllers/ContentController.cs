@@ -24,6 +24,7 @@ namespace QLLAB.Controllers
             try
             {
                 var downloadImage = await _blobStorageImageService.SaveAsync(content);
+                //TODO: Save to DB
                 return Ok(downloadImage);
             }
             catch (Exception exception)

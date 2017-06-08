@@ -1,9 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using QLLAB.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace QLLAB.Controllers
 {
@@ -21,10 +17,9 @@ namespace QLLAB.Controllers
             Answer c = new Answer("theUrl", winnerTags);
 
             Question question = new Question("tag4");
-            question.answers.Add(a);
-            question.answers.Add(b);
-            question.answers.Add(c);
-
+            question.Answers.Add(a);
+            question.Answers.Add(b);
+            question.Answers.Add(c);
             return Ok(question);
         }
 

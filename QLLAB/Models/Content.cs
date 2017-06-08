@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace QLLAB.Models
+﻿namespace QLLAB.Models
 {
     public class Content
     {

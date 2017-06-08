@@ -3,12 +3,12 @@
     public class Answer
     {
         public string Url { get; set; }
-        public string[] Tags { get; set; }
+        public bool IsWinner { get; set; }
 
-        public Answer(string url, string[] tags) 
+        public Answer(string url, bool isWinner) 
         {
             Url = url;
-            Tags = tags;
+            IsWinner = isWinner;
         }
     }
 }

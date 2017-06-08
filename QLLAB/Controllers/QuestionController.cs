@@ -10,11 +10,9 @@ namespace QLLAB.Controllers
         [Route("")]
         public IActionResult Get()
         {
-            string[] tags = { "tag1", "tag2", "tag3" };
-            Answer a = new Answer("theUrl", tags);
-            Answer b = new Answer("theUrl", tags);
-            string[] winnerTags = { "tag1", "tag2", "tag3", "tag4"};
-            Answer c = new Answer("theUrl", winnerTags);
+            Answer a = new Answer("http://via.placeholder.com/1080x640", false);
+            Answer b = new Answer("http://via.placeholder.com/1080x640", false);
+            Answer c = new Answer("http://via.placeholder.com/1080x640?text=Winner", true);
 
             Question question = new Question("tag4");
             question.Answers.Add(a);

@@ -7,9 +7,9 @@ namespace QLLAB.Controllers
     {
         [HttpGet]
         [Route("set/{deviceId}/{sensorId}/{active}")]
-        public IActionResult Set(string deviceId, string sensorId, bool active)
+        public IActionResult Set(string deviceId, string sensorId, string value)
         {
-            return Ok($"{deviceId}/{sensorId}/{active}");
+            return Ok($"{deviceId}/{sensorId}/{value}");
         }
     }
 }

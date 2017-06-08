@@ -7,6 +7,8 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using QLLAB.Data;
 using QLLAB.Models;
+using QLLAB.Repositories;
+using QLLAB.Repositories.Interfaces;
 using QLLAB.Services;
 using QLLAB.Services.Interfaces;
 using Swashbuckle.Swagger.Model;
@@ -44,6 +46,7 @@ namespace QLLAB
 
             services.AddDbContext<QlLabContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DbConnection")));
             services.AddTransient<IBlobStorageImageService, BlobStorageImageService>(provider => new BlobStorageImageService(Configuration.GetConnectionString("BlobStorageConnectionString"), provider.GetService<IOptions<AppSettings>>().Value.BlobStorageContainerName));
+            services.AddTransient<IImageRepository, ImageRepository>();
 
             services.AddCors(o => o.AddPolicy("AllowAllCorsPolicy", builder =>
             {

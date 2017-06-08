@@ -47,7 +47,7 @@ namespace QLLAB.Services
                 await blob.UploadFromStreamAsync(stream);
             }
 
-            return await Task.Run(async () => image);
+            return await Task.Run(() => image);
         }
 
         public async Task<Content> GetAsync(Guid id)

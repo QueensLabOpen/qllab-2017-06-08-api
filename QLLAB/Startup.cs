@@ -3,6 +3,10 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
+using QLLAB.Models;
+using QLLAB.Services;
+using QLLAB.Services.Interfaces;
 using Swashbuckle.Swagger.Model;
 
 namespace QLLAB
@@ -13,7 +17,7 @@ namespace QLLAB
         {
             var builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
-                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+                .AddJsonFile("appsettings.json", true, reloadOnChange: true)
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
                 .AddEnvironmentVariables();
             Configuration = builder.Build();
@@ -36,11 +40,14 @@ namespace QLLAB
                 });
             });
 
+            services.AddTransient<IBlobStorageImageService, BlobStorageImageService>(provider => new BlobStorageImageService(Configuration.GetConnectionString("BlobStorageConnectionString"), provider.GetService<IOptions<AppSettings>>().Value.BlobStorageContainerName));
+
             services.AddCors(o => o.AddPolicy("AllowAllCorsPolicy", builder =>
             {
                 builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
             }));
 
+            services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
             services.AddMvc();
         }
 

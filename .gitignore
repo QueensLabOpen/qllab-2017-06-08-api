@@ -2,3 +2,6 @@ QLLAB/bin/
 QLLAB/obj/
 QLLAB/Properties/
 .vs/
+QLLAB.Tests/bin/
+QLLAB.Tests/project.lock.json
+QLLAB.Tests/obj/

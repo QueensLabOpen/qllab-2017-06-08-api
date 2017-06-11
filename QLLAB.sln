@@ -5,6 +5,8 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "QLLAB", "QLLAB\QLLAB.xproj", "{602C7B08-B840-4345-8C2D-B3EC0D0CFB35}"
 EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "QLLAB.Tests", "QLLAB.Tests\QLLAB.Tests.xproj", "{44F18FAD-3794-4777-9608-87E6472251EF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{602C7B08-B840-4345-8C2D-B3EC0D0CFB35}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{602C7B08-B840-4345-8C2D-B3EC0D0CFB35}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{602C7B08-B840-4345-8C2D-B3EC0D0CFB35}.Release|Any CPU.Build.0 = Release|Any CPU
+		{44F18FAD-3794-4777-9608-87E6472251EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{44F18FAD-3794-4777-9608-87E6472251EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{44F18FAD-3794-4777-9608-87E6472251EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{44F18FAD-3794-4777-9608-87E6472251EF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

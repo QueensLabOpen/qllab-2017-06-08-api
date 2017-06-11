@@ -9,6 +9,7 @@ namespace QLLAB.Controllers
         [Route("set/{deviceId}/{sensorId}/{active}")]
         public IActionResult Set(string deviceId, string sensorId, string value)
         {
+            //Add code to react to sensor input
             return Ok($"{deviceId}/{sensorId}/{value}");
         }
     }

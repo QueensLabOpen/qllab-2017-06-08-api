@@ -51,6 +51,13 @@
     "preserveCompilationContext": true
   },
 
+  "runtimes": {
+    "win10-x86": {},
+    "win10-x64": {},
+    "win7-x64": {},
+    "ubuntu.16.10-x64": {}
+  },
+
   "runtimeOptions": {
     "configProperties": {
       "System.GC.Server": true

@@ -69,6 +69,7 @@ namespace QLLAB.Services
             var image = new Content
             {
                 Data = base64Str,
+                ByteData = arr,
                 Filename = $"{id}.{blob.Properties.ContentType}"
             };
 

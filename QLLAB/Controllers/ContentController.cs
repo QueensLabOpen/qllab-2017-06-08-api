@@ -4,6 +4,7 @@ using System.IO;
 using System.Net;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using QLLAB.Models;
 using QLLAB.Repositories.Interfaces;
 using QLLAB.Services.Interfaces;
@@ -13,14 +14,15 @@ namespace QLLAB.Controllers
     [Route("api/[controller]")]
     public class ContentController : Controller
     {
-        private const string BasePath = "http://qllab1-api.azurewebsites.net/api/content/{0}";
         private readonly IBlobStorageImageService _blobStorageImageService;
         private readonly IImageRepository _imageRepository;
+        private readonly IOptions<AppSettings> _appSettings;
 
-        public ContentController(IBlobStorageImageService blobStorageImageService, IImageRepository imageRepository)
+        public ContentController(IBlobStorageImageService blobStorageImageService, IImageRepository imageRepository, IOptions<AppSettings> appSettings)
         {
             _blobStorageImageService = blobStorageImageService;
             _imageRepository = imageRepository;
+            _appSettings = appSettings;
         }
 
         [HttpPost]
@@ -34,7 +36,7 @@ namespace QLLAB.Controllers
                 {
                     Filename = content.Filename,
                     Tags = content.Tags,
-                    Url = string.Format(BasePath, downloadImage.BlobId)
+                    Url = string.Format(_appSettings.Value.ImageBasePath, downloadImage.BlobId)
                 });
 
                 return Ok(downloadImage);
@@ -45,8 +47,7 @@ namespace QLLAB.Controllers
             }
         }
 
-        [HttpGet]
-        [Route("{id}")]
+        [HttpGet("{id}")]
         public async Task<IActionResult> Get(Guid id)
         {
             try
@@ -56,7 +57,8 @@ namespace QLLAB.Controllers
                     return NotFound();
 
                 var mimeType = GetMimeType(Path.GetExtension(blobImage.Filename));
-                return File(blobImage.Data, mimeType);
+                HttpContext.Response.ContentType = mimeType;
+                return File(blobImage.ByteData, mimeType);
             }
             catch (Exception exception)
             {

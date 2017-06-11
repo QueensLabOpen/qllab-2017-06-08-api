@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using QLLAB.Models;
 using QLLAB.Services.Interfaces;
 
 namespace QLLAB.Controllers
@@ -18,9 +17,7 @@ namespace QLLAB.Controllers
         [Route("")]
         public IActionResult Get()
         {
-
-
-            Question question = _questionService.GetRandom();
+            var question = _questionService.GetRandom();
             return Ok(question);
         }
 
